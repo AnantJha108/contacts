@@ -2,26 +2,26 @@ import { Avatar, IconButton, Stack, Table, TableBody, TableCell, TableHead, Tabl
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const List = (value) => {
+const List = (props) => {
     const handleDelete=(id)=>{
         console.log("this is table data" +id);
-        value.handleDelete(id);
+        props.handleDelete(id);
     }
     return (
         <TableRow hover="true">
             <TableCell>
                 <Stack direction="row" spacing={2}>
-                    <Avatar sx={{ bgcolor: "green", width:32, height:32 }}>{value.name[0]}</Avatar>
-                    <Typography sx={{ paddingTop: 0.5 }}>{value.name}</Typography>
+                    <Avatar sx={{ bgcolor: "green", width:32, height:32 }}>{props.value.name[0]}</Avatar>
+                    <Typography sx={{ paddingTop: 0.5 }}>{props.value.name}</Typography>
                 </Stack>
             </TableCell>
-            <TableCell>{value.email}</TableCell>
-            <TableCell>{value.number}</TableCell>
-            <TableCell>{value.contact1}</TableCell>
-            <TableCell>{value.job}</TableCell>
+            <TableCell>{props.value.email}</TableCell>
+            <TableCell>{props.value.number}</TableCell>
+            <TableCell>{props.value.contact1}</TableCell>
+            <TableCell>{props.value.job}</TableCell>
             <TableCell>
                 <IconButton color="error">
-                    <DeleteIcon onClick={() =>handleDelete(value.id)}/>
+                    <DeleteIcon onClick={() =>handleDelete(props.id)}/>
                 </IconButton>
             </TableCell>
         </TableRow>
@@ -29,9 +29,9 @@ const List = (value) => {
 }
 
 
-const ContactList = (value) => {
+const ContactList = (props) => {
     const handleDelete=(id)=>{
-        value.handleDelete(id);
+        props.handleDelete(id);
     }
     return (
         <Table stickyHeader>
@@ -51,9 +51,9 @@ const ContactList = (value) => {
             </TableHead>
             <TableBody>
                 {
-                    value.data.map((value, index) => (
-                        <List key={index} handleDelete={(id) =>handleDelete(id)} id={value.id} name={value.name} lastname={value.lastname} number={value.number} contact1={value.contact1} email={value.email} job={value.job} />
-                    ))
+                    (props.searchData.length > 0)?
+                    props.searchData.map((value, index) =><List key={index} handleDelete={(id) =>handleDelete(id)} value={value} />):
+                    props.data.map((value, index) =><List key={index} handleDelete={(id) =>handleDelete(id)} value={value} />)
                 }
             </TableBody>
         </Table>

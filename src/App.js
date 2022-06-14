@@ -24,6 +24,7 @@ function App() {
   const [notes, setNotes] = useState("");
   const [contact, setContact] = useState("");
   const [contact1, setContact1] = useState("");
+  const [search, setSearch] = useState("");
   const [tempData, setTempData] = useState([]);
   const [data, setData] = useState(() => {
 
@@ -60,24 +61,24 @@ function App() {
     let newArray =data.filter((item) => item.id !== id);
     setData(newArray);
   }
-
-  const handleSearching = (searchData) =>{
-    if(searchData !== "") {
+  const handleSearching = (searchValue) =>{
+    setSearch(searchValue);
+    if(searchValue !== ""){
       setTempData(data.filter((item) =>{
-        if(item.name.toLowercase().includes(searchData.toLowercase())){
+        if (item.name.toLowerCase().includes(searchValue.toLowerCase())) {
           return item;
         }
-      }));
-      setData(tempData)
-    }else{
-      setData(data);
+      }))
+    }
+    else{
+      setTempData(data);
     }
   }
 
   return (
     <>
-      <Header search={(d) => handleSearching(d)}/>
-      <Content data={data} handleDelete={(id) => handleDelete(id)} />
+      <Header setSearch={(e) => handleSearching(e)}/>
+      <Content searchData={tempData} data={data} handleDelete={(id) => handleDelete(id)} />
       <Dialog open={open} onClose={handleClose} fullWidth>
         <DialogTitle>Create Contact</DialogTitle>
         <DialogContent>

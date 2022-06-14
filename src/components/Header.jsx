@@ -4,7 +4,7 @@ import AppsIcon from '@mui/icons-material/Apps';
 import SettingsIcon from '@mui/icons-material/Settings';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
-const Header = () => {
+const Header = (props) => {
     return (
         <Box>
             <AppBar position="static" color="transparent" sx={{ color: "black", boxShadow: 0 }}>
@@ -16,7 +16,7 @@ const Header = () => {
                     <Typography variant="h6" sx={{ flexGrow: 0.1, marginLeft: "16px" }}>Contacts</Typography>
                     <Stack sx={{flexGrow:1}}>
                     <div className="col-8 ms-5">
-                        <input type="text" placeholder="Search" className="form-control" />
+                        <input type="text" onChange={(e) => props.setSearch(e.target.value)} placeholder="Search" className="form-control" />
                     </div>
                     </Stack>
                     <Stack direction="row" spacing={2}>

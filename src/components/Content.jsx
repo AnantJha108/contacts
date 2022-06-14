@@ -13,7 +13,7 @@ const Content = (props) =>{
                     <Side/>
                 </Grid>
                 <Grid item lg={10}  sx={{width:"100%",height:"100vh",overflow:'auto'}}>
-                    <ContactList data={props.data} handleDelete={(id) =>handleDelete(id)}/>
+                    <ContactList searchData={props.searchData} data={props.data} handleDelete={(id) =>handleDelete(id)}/>
                 </Grid>
             </Grid>
         </Container>
